@@ -13,6 +13,7 @@ import { ChatMessagesComponent } from './components/hub/chat-messages/chat-messa
 import { LeftSideBarComponent } from './components/hub/left-side-bar/left-side-bar.component';
 import { RightSideBarComponent } from './components/hub/right-side-bar/right-side-bar.component';
 import { NavbarComponent } from './components/hub/navbar/navbar.component';
+import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { NavbarComponent } from './components/hub/navbar/navbar.component';
     LeftSideBarComponent,
     RightSideBarComponent,
     NavbarComponent,
+    NewChatComponent,
    
   ],
   imports: [
