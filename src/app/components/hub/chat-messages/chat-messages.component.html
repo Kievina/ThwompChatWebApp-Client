@@ -1,0 +1,10 @@
+<h3>@{{chatName}}</h3>
+<ul class="list-group messages">
+  <li  *ngFor="let Message of messages" class="list-group-item" >
+    {{ Message.messageBody }}
+  </li>
+</ul>
+<div class="form-group" (keyup.enter)="sendMessage()">
+  <label for="message-input" class="sr-only"></label>
+  <input id="message-input" [(ngModel)]="messageInput" type="text" class="form-control" placeholder="Send New Message"/>
+</div>
