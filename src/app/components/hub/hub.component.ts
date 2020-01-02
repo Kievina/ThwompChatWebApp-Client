@@ -22,9 +22,6 @@ export class HubComponent implements OnInit {
   ngOnInit() {
   }
 
-  logoutCLick() {
-    this.userService.logout();
-    this.router.navigate(['login']);
-  }
+  
 
 }
