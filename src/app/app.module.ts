@@ -10,6 +10,10 @@ import { RegisterComponent } from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http';
 import { UserChatsComponent } from './components/hub/user-chats/user-chats.component';
 import { ChatMessagesComponent } from './components/hub/chat-messages/chat-messages.component';
+import { LeftSideBarComponent } from './components/hub/left-side-bar/left-side-bar.component';
+import { RightSideBarComponent } from './components/hub/right-side-bar/right-side-bar.component';
+import { NavbarComponent } from './components/hub/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { ChatMessagesComponent } from './components/hub/chat-messages/chat-messa
     LoginComponent,
     RegisterComponent,
     UserChatsComponent,
-    ChatMessagesComponent
+    ChatMessagesComponent,
+    LeftSideBarComponent,
+    RightSideBarComponent,
+    NavbarComponent,
+   
   ],
   imports: [
     BrowserModule,
