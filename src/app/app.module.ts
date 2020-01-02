@@ -14,6 +14,7 @@ import { LeftSideBarComponent } from './components/hub/left-side-bar/left-side-b
 import { RightSideBarComponent } from './components/hub/right-side-bar/right-side-bar.component';
 import { NavbarComponent } from './components/hub/navbar/navbar.component';
 import { PollComponent } from './components/hub/poll/poll.component';
+import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.component';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { PollComponent } from './components/hub/poll/poll.component';
     RightSideBarComponent,
     NavbarComponent,
     PollComponent,
-   
+    NewChatComponent,
   ],
   imports: [
     BrowserModule,

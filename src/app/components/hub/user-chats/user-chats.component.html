@@ -1,4 +1,6 @@
 <h3>Your Chats</h3>
+<a class="btn btn-primary" role="button" (click)="displayNewChat = !displayNewChat">+</a>
+<app-new-chat *ngIf="displayNewChat"></app-new-chat>
 <ul class="list-group">
   <li *ngFor="let chat of chats" class="list-group-item">
     {{chat.chatName}}

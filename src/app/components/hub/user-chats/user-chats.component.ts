@@ -10,6 +10,7 @@ import { Chat } from '../../../models/chat.model';
 })
 export class UserChatsComponent implements OnInit {
   private chats: Chat[];
+  private displayNewChat = false;
 
   constructor(private userService: UserService, private chatService: ChatService) {
     userService.getCurrentUserChats().subscribe( (response: Chat[]) => {
@@ -21,6 +22,10 @@ export class UserChatsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  newChat() {
+
   }
 
 }
