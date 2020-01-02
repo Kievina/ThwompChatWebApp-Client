@@ -1,0 +1,16 @@
+<form (ngSubmit)="newChatSubmit()">
+    <div class="form-group">
+        <label class="sr-only" for="chat-name-input"></label>
+        <input [(ngModel)]="chatNameInput" name="chatName" type="text" class="form-control" id="chat-name-input" placeholder="Chat Name">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="chat-users-input"></label>
+        <input [(ngModel)]="chatUsersInput" name="addChatUser" (keyup.enter)="addUser()" type="text" class="form-control" id="chat-users-input" placeholder="add User">
+    </div>
+    <ul>
+        <li *ngFor="let user of newUserNamesList" class="new-user">
+            {{user}}
+        </li>
+    </ul>
+    <button type="submit" class="btn btn-primary">Create Chat</button>
+</form>
