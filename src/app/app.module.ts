@@ -29,11 +29,7 @@ import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.
     RightSideBarComponent,
     NavbarComponent,
     PollComponent,
-<<<<<<< HEAD
-   
-=======
     NewChatComponent,
->>>>>>> dev
   ],
   imports: [
     BrowserModule,
