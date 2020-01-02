@@ -1,7 +1,9 @@
 <h3>@{{chatName}}</h3>
 <ul class="list-group messages">
   <li  *ngFor="let Message of messages" class="list-group-item" >
-    {{ Message.messageBody }}
+    <p>{{Message.sender.userName}}</p>
+    <p>{{Message.timeStamp}}</p>
+    <div>{{ Message.messageBody }}</div>
   </li>
 </ul>
 <div class="form-group" (keyup.enter)="sendMessage()">
