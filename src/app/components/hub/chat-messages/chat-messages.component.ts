@@ -4,6 +4,7 @@ import { ChatService } from '../../../services/chat.service';
 import { UserService } from '../../../services/user.service';
 import { Message } from '../../../models/message.model';
 import { Chat } from '../../../models/chat.model';
+import { FileService } from '../../../services/file.service'
 
 @Component({
   selector: 'app-chat-messages',
@@ -14,11 +15,12 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
-  profilePic = document.getElementById("./assets/nophoto.png");
+  profilePic = "http://localhost:8080/downloadFile/rdXPptYX_400x400.jpg";
 
   constructor(private messageService: MessageService,
               private chatService: ChatService,
-              private userService: UserService) {
+              private userService: UserService,
+              private fileservice: FileService) {
                 
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
@@ -45,9 +47,16 @@ export class ChatMessagesComponent implements OnInit {
     );
     this.messageInput = '';
   }
-
-  displayNewPic() {
-   this.profilePic = document.getElementById("./assets/nophoto.png");
-
+  changePic(){
+    this.fileservice.onUpload
   }
+
+  changeImage() {
+
+    this.profilePic = "./assets/nophoto.png"
+}
+  // displayNewPic() {
+  //  this.profilePic = document.getElementById("./assets/nophoto.png");
+
+  // }
 }
