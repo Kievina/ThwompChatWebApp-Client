@@ -14,10 +14,12 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
+  profilePic = document.getElementById("./assets/nophoto.png");
 
   constructor(private messageService: MessageService,
               private chatService: ChatService,
               private userService: UserService) {
+                
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
         this.chatName = chat.chatName;
@@ -31,6 +33,7 @@ export class ChatMessagesComponent implements OnInit {
         });
       }
     });
+
   }
 
   ngOnInit() {
@@ -41,5 +44,10 @@ export class ChatMessagesComponent implements OnInit {
       console.log(response)
     );
     this.messageInput = '';
+  }
+
+  displayNewPic() {
+   this.profilePic = document.getElementById("./assets/nophoto.png");
+
   }
 }

@@ -1,7 +1,11 @@
 <h3>@{{chatName}}</h3>
 <ul class="list-group messages">
   <li  *ngFor="let Message of messages" class="list-group-item" >
-    <p> <img src="http://localhost:8080/downloadFile/rdXPptYX_400x400.jpg" alt="default" style="width:32px;height:32x;"> {{Message.sender.userName}}</p>
+    <!-- <p> <img src="http://localhost:8080/downloadFile/rdXPptYX_400x400.jpg" alt="./assets/nophoto.png" style="width:32px;height:32x;"> {{Message.sender.userName}}</p> -->
+    <!-- var x = document.getElementById("myImg"); -->
+    <!-- <p> <img src="./assets/nophoto.png" alt="default" style="width:32px;height:32x;"> {{Message.sender.userName}}</p> -->
+    <p> <img src="profilePic" alt="default" style="width:32px;height:32x;"> {{Message.sender.userName}}</p>
+
     <p>{{Message.timeStamp}}</p>
     <div>{{ Message.messageBody }}</div>
     
