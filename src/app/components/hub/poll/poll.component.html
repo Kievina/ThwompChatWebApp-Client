@@ -1,2 +1,18 @@
 <p>poll works!</p>
+<form>
+    <div class="form-group">
+        <!-- <label class="sr-only" for="chat-name-input"></label>
+        <input [(ngModel)]="chatNameInput" name="chatName" type="text" class="form-control" id="chat-name-input"
+            placeholder="Chat Name"> -->
+            <!-- <label for="formPollNameInput">Type Your Question Here</label> -->
+            <input type="text" class="form-control" id="pollQuestion" placeholder="Type your question here ...">
+    </div>
+    <div class="form-group">
+        <!-- <label class="sr-only" for="chat-users-input"></label>
+        <input [(ngModel)]="chatUsersInput" name="addChatUser" (keyup.enter)="addUser()" type="text"
+            class="form-control" id="chat-users-input" placeholder="add User"> -->
+            <input type="text" class="form-control" id="optionInput" placeholder="Type answer choice here ...">
 
+    </div>
+    <button type="submit" class="btn btn-primary">Create Poll</button>
+</form>
