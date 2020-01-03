@@ -57,7 +57,7 @@ export class ChatMessagesComponent implements OnInit {
 
   changeImage() {
     if(this.profilePic === "./assets/nophoto.png"){
-    this.profilePic = "http://localhost:8080/downloadFile/rdXPptYX_400x400.jpg"
+    this.profilePic = "./assets/rdXPptYX_400x400.jpg"
     }else{
     this.profilePic =  "./assets/nophoto.png"
     }
