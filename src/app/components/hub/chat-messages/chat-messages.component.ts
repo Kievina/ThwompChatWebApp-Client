@@ -4,6 +4,7 @@ import { ChatService } from '../../../services/chat.service';
 import { UserService } from '../../../services/user.service';
 import { Message } from '../../../models/message.model';
 import { Chat } from '../../../models/chat.model';
+import { FileService } from '../../../services/file.service'
 
 @Component({
   selector: 'app-chat-messages',
@@ -14,10 +15,13 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
+  profilePic = "./assets/nophoto.png";
 
   constructor(private messageService: MessageService,
               private chatService: ChatService,
-              private userService: UserService) {
+              private userService: UserService,
+              private fileservice: FileService) {
+                
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
         this.chatName = chat.chatName;
@@ -31,6 +35,7 @@ export class ChatMessagesComponent implements OnInit {
         });
       }
     });
+
   }
 
   ngOnInit() {
@@ -42,4 +47,24 @@ export class ChatMessagesComponent implements OnInit {
     );
     this.messageInput = '';
   }
+
+
+  changePic(){
+    this.fileservice.onFileChanged(event);
+    this.fileservice.onUpload();
+  
+  }
+
+  changeImage() {
+    if(this.profilePic === "./assets/nophoto.png"){
+    this.profilePic = "./assets/rdXPptYX_400x400.jpg"
+    }else{
+    this.profilePic =  "./assets/nophoto.png"
+    }
+    
+}
+  // displayNewPic() {
+  //  this.profilePic = document.getElementById("./assets/nophoto.png");
+
+  // }
 }
