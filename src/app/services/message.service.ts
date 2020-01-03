@@ -10,7 +10,7 @@ import {Observable, Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class MessageService {
-  private serverUrl = 'http://${window.location.hostname}:8080/ws';
+  private serverUrl = `http://${window.location.hostname}:8080/ws`;
   private stompClient;
   private socketObserver = new Subject<Message>();
 
