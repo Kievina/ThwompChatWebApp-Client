@@ -15,7 +15,7 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
-  profilePic = "http://localhost:8080/downloadFile/rdXPptYX_400x400.jpg";
+  profilePic = "./assets/nophoto.png";
 
   constructor(private messageService: MessageService,
               private chatService: ChatService,
@@ -47,13 +47,21 @@ export class ChatMessagesComponent implements OnInit {
     );
     this.messageInput = '';
   }
+
+
   changePic(){
-    this.fileservice.onUpload
+    this.fileservice.onFileChanged(event);
+    this.fileservice.onUpload();
+  
   }
 
   changeImage() {
-
-    this.profilePic = "./assets/nophoto.png"
+    if(this.profilePic === "./assets/nophoto.png"){
+    this.profilePic = "http://localhost:8080/downloadFile/rdXPptYX_400x400.jpg"
+    }else{
+    this.profilePic =  "./assets/nophoto.png"
+    }
+    
 }
   // displayNewPic() {
   //  this.profilePic = document.getElementById("./assets/nophoto.png");
