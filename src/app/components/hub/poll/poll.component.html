@@ -1,18 +1,21 @@
 <p>poll works!</p>
-<form>
-    <div class="form-group">
-        <!-- <label class="sr-only" for="chat-name-input"></label>
+<a class="btn btn-primary" role="button" (click)="displayNewPoll = !displayNewPoll"> Create Poll</a>
+
+<div class="form-group" *ngIf="displayNewPoll">
+    <!-- <label class="sr-only" for="chat-name-input"></label>
         <input [(ngModel)]="chatNameInput" name="chatName" type="text" class="form-control" id="chat-name-input"
             placeholder="Chat Name"> -->
-            <!-- <label for="formPollNameInput">Type Your Question Here</label> -->
-            <input type="text" class="form-control" id="pollQuestion" placeholder="Type your question here ...">
-    </div>
-    <div class="form-group">
-        <!-- <label class="sr-only" for="chat-users-input"></label>
-        <input [(ngModel)]="chatUsersInput" name="addChatUser" (keyup.enter)="addUser()" type="text"
-            class="form-control" id="chat-users-input" placeholder="add User"> -->
-            <input type="text" class="form-control" id="optionInput" placeholder="Type answer choice here ...">
+    <!-- <label for="formPollNameInput">Type Your Question Here</label> -->
+    <input type="text" class="form-control" id="pollQuestion" placeholder="Type your question here ...">
+</div>
+<a class="btn btn-primary" role="button" (click)="displayNewOption = !displayNewOption">+</a>
 
-    </div>
-    <button type="submit" class="btn btn-primary">Create Poll</button>
-</form>
+<div class="form-group" *ngIf="displayNewOption">
+    <!-- <label class="sr-only" for="chat-users-input"></label>
+                <input [(ngModel)]="chatUsersInput" name="addChatUser" (keyup.enter)="addUser()" type="text"
+                    class="form-control" id="optionInput" placeholder="Type answer choice here ..."> -->
+    <input type="text" class="form-control" id="optionInput" placeholder="New answer choice here ...">
+    <button type="submit" class="btn btn-primary">Submit Poll</button>
+</div>
+
+
