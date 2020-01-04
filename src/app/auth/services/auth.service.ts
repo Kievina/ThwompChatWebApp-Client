@@ -1,44 +1,40 @@
-import { Injectable } from '@angular/core';
-
-import { TokenService } from './token.service'
-import { Credentials } from '../credentials';
-import { HttpResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+  
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {RegisterPayload} from './../register-payload';
+import {Observable} from 'rxjs';
+import {LoginPayload} from './../login-payload';
+import {JwtAutResponse} from '../jwt-aut-response';
+import {map} from 'rxjs/operators';
+import {LocalStorageService} from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private url = 'http://localhost:8080/api/auth/';
 
-  static readonly TOKEN_STORAGE_KEY = 'token';
-  redirectToUrl: string = '/cookies';
-
-  constructor(private router: Router, private tokenService: TokenService) { }
-
-  public login(credentials: Credentials): void {
-    this.tokenService.getResponseHeaders(credentials)
-    .subscribe((res: HttpResponse<any>) => {
-      this.saveToken(res.headers.get('authorization'));
-      this.router.navigate([this.redirectToUrl]);
-    });
+  constructor(private httpClient: HttpClient, private localStoraqeService: LocalStorageService) {
   }
 
-  private saveToken(token: string){
-    localStorage.setItem(AuthService.TOKEN_STORAGE_KEY, token);
+  register(registerPayload: RegisterPayload): Observable<any> {
+    return this.httpClient.post(this.url + 'signup', registerPayload);
   }
 
-  public getToken(): string {
-    return localStorage.getItem(AuthService.TOKEN_STORAGE_KEY);
+  login(loginPayload: LoginPayload): Observable<boolean> {
+    return this.httpClient.post<JwtAutResponse>(this.url + 'login', loginPayload).pipe(map(data => {
+      this.localStoraqeService.store('authenticationToken', data.authenticationToken);
+      this.localStoraqeService.store('username', data.username);
+      return true;
+    }));
   }
 
-  public logout(): void {
-    this.tokenService.logout()
-    .subscribe(() =>{
-      localStorage.removeItem(AuthService.TOKEN_STORAGE_KEY);
-    });
+  isAuthenticated(): boolean {
+    return this.localStoraqeService.retrieve('username') != null;
   }
 
-  public isLoggedIn(): boolean {
-    return !!this.getToken();
+  logout() {
+    this.localStoraqeService.clear('authenticationToken');
+    this.localStoraqeService.clear('username');
   }
 }

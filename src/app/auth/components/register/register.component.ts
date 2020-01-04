@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Register } from '../../register';
-import { RegisterService } from '../../services/register.service';
-import { Router } from '@angular/router';
-import {UserService } from '../../../services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {RegisterPayload} from '../../register-payload';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,18 +10,39 @@ import {UserService } from '../../../services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  newUser: Register = new Register();
-  
-  constructor(private registerService: RegisterService, private router: Router, private userService: UserService) { }
+
+  registerForm: FormGroup;
+  registerPayload: RegisterPayload;
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router:Router) {
+    this.registerForm = this.formBuilder.group({
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    });
+    this.registerPayload = {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
+  }
 
   ngOnInit() {
   }
 
-  registerForm(registerData){
-    this.userService.registerUser(registerData).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['login']);
-    }, error => console.log('Oh No!'));
-  }
+  onSubmit() {
+    this.registerPayload.username = this.registerForm.get('username').value;
+    this.registerPayload.email = this.registerForm.get('email').value;
+    this.registerPayload.password = this.registerForm.get('password').value;
+    this.registerPayload.confirmPassword = this.registerForm.get('confirmPassword').value;
 
+    this.authService.register(this.registerPayload).subscribe(data => {
+      console.log('register succes');
+      this.router.navigateByUrl('/register-success');
+    }, error => {
+      console.log('register failed');
+    });
+  }
 }

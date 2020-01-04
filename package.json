@@ -1,5 +1,5 @@
 {
-"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ChatApp"
+    }
+  },
+  "defaultProject": "ChatApp",
+  "dependencies": {
+    "ngx-webstorage": "^4.0.1"
+  }
 }
