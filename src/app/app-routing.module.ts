@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from '../app/guards/auth.guard';
+import { LoginComponent } from './auth/components/login/login.component';
+import { CookieListComponent } from './pages/cookie-list/cookie-list.component';
+
 import {HubComponent} from './components/hub/hub.component';
 
 
-import {AddUserComponent} from "../app/components/add-user/add-user.component"
-import {ListUserComponent} from "../app/components/list-user/list-user.component";
-import {EditUserComponent} from "../app/components/edit-user/edit-user.component";
+// import {AddUserComponent} from "../app/components/add-user/add-user.component"
+// import {ListUserComponent} from "../app/components/list-user/list-user.component";
+// import {EditUserComponent} from "../app/components/edit-user/edit-user.component";
 
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'add-user', component: AddUserComponent },
-  { path: 'list-user', component: ListUserComponent },
-  { path: 'edit-user', component: EditUserComponent },
-  { path: 'hub', component: HubComponent },
-  {path : '', component : LoginComponent}
-  
+  { canActivate: [AuthGuard], path: 'cookies', component: CookieListComponent }
 ];
-export const routing = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

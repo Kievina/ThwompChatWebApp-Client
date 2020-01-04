@@ -4,8 +4,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HubComponent } from './components/hub/hub.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+
+
 import {HTTP_INTERCEPTORS, HttpClientModule, } from '@angular/common/http';
 import { UserChatsComponent } from './components/hub/user-chats/user-chats.component';
 import { ChatMessagesComponent } from './components/hub/chat-messages/chat-messages.component';
@@ -15,11 +15,18 @@ import { NavbarComponent } from './components/hub/navbar/navbar.component';
 import { PollComponent } from './components/hub/poll/poll.component';
 import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.component';
 import { ListUserComponent } from './components/list-user/list-user.component';
-import { AddUserComponent } from './components/add-user/add-user.component';
-import { EditUserComponent } from './components/edit-user/edit-user.component';
-import {routing} from "./app-routing.module";
+
 import {ApiService} from "../app/services/api.service";
 import {TokenInterceptor} from "./core/interceptor";
+
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { LoginComponent } from './auth/components/login/login.component';
+import { JwtTokenInterceptor } from '../app/interceptors/jwt.token.interceptor';
+import { CookieListComponent } from './pages/cookie-list/cookie-list.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 
 @NgModule({
@@ -27,7 +34,6 @@ import {TokenInterceptor} from "./core/interceptor";
     AppComponent,
     HubComponent,
     LoginComponent,
-    RegisterComponent,
     UserChatsComponent,
     ChatMessagesComponent,
     LeftSideBarComponent,
@@ -36,19 +42,24 @@ import {TokenInterceptor} from "./core/interceptor";
     PollComponent,
     NewChatComponent,
     ListUserComponent,
-    AddUserComponent,
-    EditUserComponent,
+    FooterComponent,
+    HeaderComponent,
+    CookieListComponent,
   ],
   imports: [
     BrowserModule,
-    routing,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ApiService, {provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi : true}],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtTokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
