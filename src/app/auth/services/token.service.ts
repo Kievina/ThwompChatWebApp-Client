@@ -8,7 +8,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   observe: 'response' as 'response'
 };
-const API_URL = `http://${window.location.hostname}:8080/`;
+const API_URL = `http://${window.location.hostname}:8080`;
 
 @Injectable({
   providedIn: 'root'
