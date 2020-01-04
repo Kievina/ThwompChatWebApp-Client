@@ -49,7 +49,7 @@ export class ChatMessagesComponent implements OnInit {
   }
 
 
-  changePic(){
+  changePic(event){
     this.fileservice.onFileChanged(event);
     this.fileservice.onUpload();
   
