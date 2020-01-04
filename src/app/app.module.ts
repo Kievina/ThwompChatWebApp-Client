@@ -27,6 +27,7 @@ import { JwtTokenInterceptor } from '../app/interceptors/jwt.token.interceptor';
 import { CookieListComponent } from './pages/cookie-list/cookie-list.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { RegisterComponent } from './auth/components/register/register.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { HeaderComponent } from './layout/header/header.component';
     FooterComponent,
     HeaderComponent,
     CookieListComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
