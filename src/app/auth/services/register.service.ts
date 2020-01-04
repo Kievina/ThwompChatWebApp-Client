@@ -13,6 +13,6 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   registerUser(newUser : Register){
-    return this.http.post<Register>(this.url + "/register", newUser);
+    return this.http.post<Register>(this.url + "/api/users", newUser);
   }
 }
