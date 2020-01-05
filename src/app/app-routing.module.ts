@@ -9,6 +9,9 @@ import {HubComponent} from './components/hub/hub.component';
 
 const routes: Routes = [
   { path: 'hub' , component: HubComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: 'login' , component: LoginComponent},
+  { path: 'register' , component: RegisterComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
