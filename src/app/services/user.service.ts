@@ -59,4 +59,10 @@ export class UserService {
           return of(); })
       );
   }
+
+  updateCurrentUserProfilePic(filename) {
+    let user = this.getCurrentUser();
+    user.profilePic = filename;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
 }
