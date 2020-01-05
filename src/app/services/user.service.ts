@@ -50,13 +50,4 @@ export class UserService {
     localStorage.removeItem('currentUser');
     this.currentUser.next(null);
   }
-
-  getCurrentUserChats() {
-    return this.http.get(`http://${window.location.hostname}:8080/user/${this.getCurrentUser().userId}/chats`)
-      .pipe(
-        catchError(error => {
-          console.log('Oh No, mi pipe');
-          return of(); })
-      );
-  }
 }
