@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import {BehaviorSubject, of} from 'rxjs';
 import {Chat} from '../models/chat.model';
+import {UserService} from './user.service';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ import {Chat} from '../models/chat.model';
 export class ChatService {
   private currentChat: BehaviorSubject<Chat>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     this.currentChat = new BehaviorSubject<Chat>(null);
   }
 
@@ -24,5 +26,15 @@ export class ChatService {
 
   updateCurrentChat(chat: Chat) {
     this.currentChat.next(chat);
+  }
+
+  getChatsOfCurrentUser() {
+    const currentUser: User = this.userService.getCurrentUser();
+    return this.http.get(`http://${window.location.hostname}:8080/chat/user/${currentUser.userId}`)
+        .pipe(
+            catchError(error => {
+              console.log('Oh No, mi pipe');
+              return of(); })
+        );
   }
 }

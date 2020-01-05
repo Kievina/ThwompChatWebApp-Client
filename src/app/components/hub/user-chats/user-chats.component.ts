@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
 import { ChatService } from '../../../services/chat.service';
 import { Chat } from '../../../models/chat.model';
 
@@ -12,8 +11,8 @@ export class UserChatsComponent implements OnInit {
   private chats: Chat[];
   private displayNewChat = false;
 
-  constructor(private userService: UserService, private chatService: ChatService) {
-    userService.getCurrentUserChats().subscribe( (response: Chat[]) => {
+  constructor(private chatService: ChatService) {
+    chatService.getChatsOfCurrentUser().subscribe( (response: Chat[]) => {
       this.chats = response;
       chatService.updateCurrentChat(this.chats[0]);
 

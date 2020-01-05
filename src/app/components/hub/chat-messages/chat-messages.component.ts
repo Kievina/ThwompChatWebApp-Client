@@ -15,13 +15,13 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
-  profilePic = "./assets/nophoto.png";
+  profilePic = './assets/nophoto.png';
 
   constructor(private messageService: MessageService,
               private chatService: ChatService,
               private userService: UserService,
               private fileservice: FileService) {
-                
+
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
         this.chatName = chat.chatName;
@@ -29,7 +29,6 @@ export class ChatMessagesComponent implements OnInit {
           this.messages = messages;
         });
         messageService.getMessageObserver().subscribe(message => {
-          console.log(message);
           this.messages.push(message);
           console.log(this.messages);
         });
