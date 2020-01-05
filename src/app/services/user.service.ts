@@ -21,7 +21,7 @@ export class UserService {
   }
 
   registerUser(user) {
-    return this.http.post(`http://localhost:8080/user/`, user)
+    return this.http.post(`http://${window.location.hostname}:8080/user/`, user)
       .pipe(
         map((result: User) => {
           localStorage.setItem('currentUser', JSON.stringify(result));
@@ -34,7 +34,7 @@ export class UserService {
   }
 
   loginUser(username) {
-    return this.http.get(`http://localhost:8080/user/${username}/login`)
+    return this.http.get(`http://${window.location.hostname}:8080/user/${username}/login`)
       .pipe(
         map((result: User) => {
           localStorage.setItem('currentUser', JSON.stringify(result));

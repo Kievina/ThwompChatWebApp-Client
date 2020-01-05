@@ -30,8 +30,6 @@ export class ChatMessagesComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private fileservice: FileService) {
-                
-                
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
         this.chatName = chat.chatName;
@@ -39,7 +37,6 @@ export class ChatMessagesComponent implements OnInit {
           this.messages = messages;
         });
         messageService.getMessageObserver().subscribe(message => {
-          console.log(message);
           this.messages.push(message);
           console.log(this.messages);
         });
@@ -63,20 +60,9 @@ export class ChatMessagesComponent implements OnInit {
   changePic(event){
     this.fileservice.onFileChanged(event);
     this.fileservice.onUpload();
-    // this.profilePic = this.currentUser.profilePic;
-    // this.router.navigate(['hub']);
-    console
+    
   
   }
-
-  changeImage() {
-    if(this.profilePic === "./assets/nophoto.png"){
-    this.profilePic = "./assets/rdXPptYX_400x400.jpg"
-    }else{
-    this.profilePic =  "./assets/nophoto.png"
-    }
-    
-}
   // displayNewPic() {
   //  this.profilePic = document.getElementById("./assets/nophoto.png");
 

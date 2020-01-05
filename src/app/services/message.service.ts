@@ -10,7 +10,7 @@ import {Observable, Subject} from 'rxjs';
   providedIn: 'root'
 })
 export class MessageService {
-  private serverUrl = 'http://localhost:8080/ws';
+  private serverUrl = `http://${window.location.hostname}:8080/ws`;
   private stompClient;
   private socketObserver = new Subject<Message>();
 
@@ -19,8 +19,9 @@ export class MessageService {
   }
 
   connectToWebSocket() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.Stomp.over(ws);
+    this.stompClient = Stomp.Stomp.over(() => {
+      return new SockJS(this.serverUrl);
+    });
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe('/topic/public', (response) => {
         if ( response.body ) {
@@ -31,7 +32,7 @@ export class MessageService {
   }
 
   getAllMessages(chatId) {
-    return this.http.get<Message[]>(`http://localhost:8080/chat/${chatId}/messages`);
+    return this.http.get<Message[]>(`http://${window.location.hostname}:8080/chat/${chatId}/messages`);
   }
 
   getMessageObserver() {
@@ -42,7 +43,7 @@ export class MessageService {
     const theMessage = {
       messageBody: message
     };
-    return this.http.post(`http://localhost:8080/user/${userId}/chat/${chatId}/message`, theMessage).pipe(
+    return this.http.post(`http://${window.location.hostname}:8080/user/${userId}/chat/${chatId}/message`, theMessage).pipe(
       map(response => {
         this.stompClient.send('/app/chat.sendMessage', {}, JSON.stringify(response));
       })
