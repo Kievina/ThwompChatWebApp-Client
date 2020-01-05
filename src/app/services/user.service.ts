@@ -50,4 +50,19 @@ export class UserService {
     localStorage.removeItem('currentUser');
     this.currentUser.next(null);
   }
+
+  getCurrentUserChats() {
+    return this.http.get(`http://localhost:8080/user/${this.getCurrentUser().userId}/chats`)
+      .pipe(
+        catchError(error => {
+          console.log('Oh No, mi pipe');
+          return of(); })
+      );
+  }
+
+  updateCurrentUserProfilePic(filename) {
+    let user = this.getCurrentUser();
+    user.profilePic = filename;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
 }
