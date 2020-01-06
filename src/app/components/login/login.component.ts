@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
   loginForm(){
     this.authenticate.authenticate(this.login.username, this.login.password)
-                    .subscribe( result => this.router.navigate(['/logged-in'])); 
+                    .subscribe( result => this.router.navigate(['hub'])); 
     // console.log(this.login.username + "  " + this.login.password)
   }
 
