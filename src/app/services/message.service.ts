@@ -5,6 +5,7 @@ import { Message } from '../models/message.model';
 import * as Stomp from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import {Observable, Subject} from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +50,5 @@ export class MessageService {
       })
     );
   }
+ 
 }
