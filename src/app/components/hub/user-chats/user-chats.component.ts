@@ -12,10 +12,8 @@ export class UserChatsComponent implements OnInit {
   private displayNewChat = false;
 
   constructor(private chatService: ChatService) {
-    chatService.getChatsOfCurrentUser().subscribe( (response: Chat[]) => {
+    chatService.getUserChatsObservable().subscribe( (response: Chat[]) => {
       this.chats = response;
-      chatService.updateCurrentChat(this.chats[0]);
-
       console.log(this.chats);
     });
   }
@@ -23,8 +21,8 @@ export class UserChatsComponent implements OnInit {
   ngOnInit() {
   }
 
-  newChat() {
-
+  selectChat(chat) {
+    this.chatService.updateCurrentChat(chat);
   }
 
 }
