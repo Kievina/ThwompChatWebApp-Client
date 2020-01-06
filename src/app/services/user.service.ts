@@ -39,11 +39,18 @@ export class UserService {
 
   getCurrentUserChats() {
     return this.http.get(`this.url + "user/" + ${sessionStorage.getCurrentUser().userId}/chats`)
+
       .pipe(
         catchError(error => {
           console.log('Oh No, mi pipe');
           return of(); })
       );
+  }
+
+  updateCurrentUserProfilePic(filename) {
+    let user = this.getCurrentUser();
+    user.profilePic = filename;
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 }
 

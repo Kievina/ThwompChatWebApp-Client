@@ -19,8 +19,9 @@ export class MessageService {
   }
 
   connectToWebSocket() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.Stomp.over(ws);
+    this.stompClient = Stomp.Stomp.over(() => {
+      return new SockJS(this.serverUrl);
+    });
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe('/topic/public', (response) => {
         if ( response.body ) {
