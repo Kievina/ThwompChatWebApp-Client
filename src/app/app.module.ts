@@ -15,6 +15,9 @@ import { RightSideBarComponent } from './components/hub/right-side-bar/right-sid
 import { NavbarComponent } from './components/hub/navbar/navbar.component';
 import { PollComponent } from './components/hub/poll/poll.component';
 import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.component';
+import { TopRightComponent } from './components/hub/right-side-bar/top-right/top-right.component';
+import { BottomRightComponent } from './components/hub/right-side-bar/bottom-right/bottom-right.component';
+
 
 
 @NgModule({
@@ -30,6 +33,8 @@ import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.
     NavbarComponent,
     PollComponent,
     NewChatComponent,
+    TopRightComponent,
+    BottomRightComponent,
   ],
   imports: [
     BrowserModule,
