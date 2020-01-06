@@ -12,6 +12,26 @@ export class User   {
     this.password = password;
     this.email = email;
     this.activeStatus = activeStatus;
+  } 
+
+  getUserId() {
+    return this.userId;
+  }
+
+  getUserName() {
+    return this.userName;
+  }
+
+  getUserPassword() {
+    return this.password;
+  }
+
+  getUserEmail()  {
+    return this.email;
+  }
+
+  getUserActiveStatus() {
+    return this.activeStatus;
   }
 
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Login } from '../../models/login';
 import { UserService } from '../../services/user.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,25 +11,22 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm;
+  login: Login = new Login();
 
   constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private router: Router ) {
-    this.loginForm = this.formBuilder.group( {
-      userName: '',
-      password: ''
-    });
+    private router: Router,
+    private route: ActivatedRoute,
+    private authenticate: AuthenticationService
+    ) { }
+
+  ngOnInit() {
+  }
+  loginForm(){
+    this.authenticate.authenticate(this.login.username, this.login.password)
+                    .subscribe( result => this.router.navigate(['/logged-in'])); 
+    // console.log(this.login.username + "  " + this.login.password)
   }
 
-  ngOnInit() {}
-
-  onSubmit() {
-    this.userService.loginUser(this.loginForm.value.userName).subscribe( response => {
-      console.log(response);
-      this.router.navigate(['hub']);
-    }, error => console.log('Oh No!'));
-  }
+  
 
 }

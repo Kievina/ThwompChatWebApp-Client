@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ChatApp';
+
+  constructor(private router: Router, private authenticate: AuthenticationService) { }
+
+  displayPreLoginHeader() {
+    return this.authenticate.isUserLoggedIn();
+  }
 }

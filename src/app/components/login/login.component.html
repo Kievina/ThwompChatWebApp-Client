@@ -1,21 +1,22 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-auto">
+<div class="container">
+    <h1><b>User Login</b></h1>
+    <hr style="margin: 0 15%; border-top-color: #18d26e;">
 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form #it="ngForm" (ngSubmit)="loginForm()">
+
         <div class="form-group">
-          <label class="sr-only" for="InputUserName"></label>
-          <input type="text" class="form-control" id="InputUserName" placeholder="Username" formControlName="userName">
+            <label>Username</label>
+            <input type="text" type="username" name="username" class="form-control" [(ngModel)]="login.username" 
+                    #username="ngModel" required>
         </div>
         <div class="form-group">
-          <label class="sr-only" for="InputPassword"></label>
-          <input type="password" class="form-control" id="InputPassword" placeholder="Password" formControlName="password">
+            <label>Password</label>
+            <!-- type password being stupid -->
+            <input type="text" type="" name="password" class="form-control" [(ngModel)]="login.password" 
+                    #password="ngModel" required>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-
+        <button type="submit" class="btn" [disabled]="!it.form.valid">Log in</button>
         <p class="register">Need an account? <a routerLink="/register" class="login-switch link">Register</a></p>
-      </form>
+    </form>
 
-    </div>
-  </div>
 </div>

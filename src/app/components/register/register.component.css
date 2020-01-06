@@ -1,0 +1,19 @@
+.container{
+    margin: auto;
+    margin-top: 5%;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    
+}
+.form-control{
+    width: 50%;
+    margin: auto;
+}
+.btn{
+    background-color: lightgrey;
+    font-weight: bold;
+}
+.btn:hover{
+    color: #18d26e;
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import { BehaviorSubject, of} from 'rxjs';
+import { Observable } from 'rxjs';
 
 import {User} from '../models/user.model';
 
@@ -10,49 +11,34 @@ import {User} from '../models/user.model';
 })
 export class UserService {
   private currentUser: BehaviorSubject<User>;
+  private url: string = "http://localhost:8080/";
 
-  constructor(private http: HttpClient) {
-    this.currentUser = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    console.log(this.currentUser.value);
-  }
-
+  constructor(private http: HttpClient) {}  
+  getUser(username: string) :Observable<any>{
+    return this.http.get<any>(this.url + "user/get/" +username);
+    } 
+  getUserId(username: string): Observable<any>{
+    return this.http.get<any>(this.url + "user/get/" + username).pipe(map(
+      userData => {
+        sessionStorage.setItem('userId', userData.userId);
+      }
+    ));
+  } 
   getCurrentUser() {
     return this.currentUser.value;
   }
 
-  registerUser(user) {
-    return this.http.post(`http://${window.location.hostname}:8080/user/`, user)
-      .pipe(
-        map((result: User) => {
-          localStorage.setItem('currentUser', JSON.stringify(result));
-          this.currentUser.next(result);
-          return result; }),
-        catchError(error => {
-          console.log('Oh No, mi pipe');
-          return of(); })
-      );
+  updateUser(user : User){
+    return this.http.put<User[]>(this.url + "user/update/" + sessionStorage.getItem('userId'),user);
+
   }
 
-  loginUser(username) {
-    return this.http.get(`http://${window.location.hostname}:8080/user/${username}/login`)
-      .pipe(
-        map((result: User) => {
-          localStorage.setItem('currentUser', JSON.stringify(result));
-          this.currentUser.next(result);
-          return result; }),
-        catchError(error => {
-          console.log('Oh No, mi pipe');
-          return of(); })
-      );
-  }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUser.next(null);
-  }
+
+
 
   getCurrentUserChats() {
-    return this.http.get(`http://${window.location.hostname}:8080/user/${this.getCurrentUser().userId}/chats`)
+    return this.http.get(`this.url + "user/" + ${sessionStorage.getCurrentUser().userId}/chats`)
       .pipe(
         catchError(error => {
           console.log('Oh No, mi pipe');
@@ -60,3 +46,4 @@ export class UserService {
       );
   }
 }
+

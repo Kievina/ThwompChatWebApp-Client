@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-
-import { UserService } from '../../services/user.service';
-import {Router} from '@angular/router';
+import { Register } from '../../models/register';
+import { RegisterService } from '../../services/register.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,27 +10,14 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private router: Router) {
-    this.registerForm = this.formBuilder.group( {
-      email: '',
-      userName: '',
-      password: ''
-    });
-  }
+  newUser: Register = new Register();
+  constructor(private registerService: RegisterService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  onSubmit(registerData) {
-    this.userService.registerUser(registerData).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['hub']);
-    }, error => console.log('Oh No!'));
+  registerForm(){
+    this.registerService.registerUser(this.newUser).subscribe(data => this.router.navigate(['/login']));
   }
 
 }
