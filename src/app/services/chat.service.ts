@@ -11,9 +11,18 @@ import {User} from '../models/user.model';
 })
 export class ChatService {
   private currentChat: BehaviorSubject<Chat>;
+  private userChats: BehaviorSubject<Chat[]>;
 
   constructor(private http: HttpClient, private userService: UserService) {
     this.currentChat = new BehaviorSubject<Chat>(null);
+    this.userChats = new BehaviorSubject<Chat[]>(null);
+
+    userService.getCurrentUserObservable().subscribe((user: User) => {
+        this.loadChatsOfCurrentUser().subscribe((chats: Chat[]) => {
+            this.currentChat.next(chats[0]);
+            this.userChats.next(chats);
+        });
+    });
   }
 
   getCurrentChat() {
@@ -28,7 +37,15 @@ export class ChatService {
     this.currentChat.next(chat);
   }
 
-  getChatsOfCurrentUser() {
+  getUserChats() {
+      return this.userChats.value;
+  }
+
+  getUserChatsObservable() {
+      return this.userChats.asObservable();
+  }
+
+  private loadChatsOfCurrentUser() {
     const currentUser: User = this.userService.getCurrentUser();
     return this.http.get(`http://${window.location.hostname}:8080/chat/user/${currentUser.userId}`)
         .pipe(
@@ -41,6 +58,10 @@ export class ChatService {
   createChat(chat, adminId) {
     return this.http.post(`http://${window.location.hostname}:8080/chat/${adminId}`, chat)
         .pipe(
+            map((result: Chat) => {
+                this.userChats.value.push(result);
+                return result;
+            }),
             catchError(error => {
               console.log('Error creating chat');
               return of(); })

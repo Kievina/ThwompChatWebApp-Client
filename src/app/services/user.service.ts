@@ -20,6 +20,10 @@ export class UserService {
     return this.currentUser.value;
   }
 
+  getCurrentUserObservable() {
+      return this.currentUser.asObservable();
+  }
+
   registerUser(user) {
     return this.http.post(`http://${window.location.hostname}:8080/user/`, user)
       .pipe(
