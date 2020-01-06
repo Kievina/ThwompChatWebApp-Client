@@ -4,7 +4,6 @@ import { ChatService } from '../../../services/chat.service';
 import { UserService } from '../../../services/user.service';
 import { Message } from '../../../models/message.model';
 import { Chat } from '../../../models/chat.model';
-import { FileService } from '../../../services/file.service';
 import { User } from '../../../models/user.model';
 import { Router } from '@angular/router';
 
@@ -18,19 +17,21 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
-  currentUser: User = this.userService.getCurrentUser();
-  profilePic = this.currentUser.profilePic;
+  // currentUser: User = this.userService.getCurrentUser();
+  // profilePic = this.currentUser.profilePic;
 
   constructor(private messageService: MessageService,
               private chatService: ChatService,
               private userService: UserService,
               private router: Router,
-              private fileservice: FileService) {
+            
+              ) {
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
         this.chatName = chat.chatName;
         messageService.getAllMessages(chat.chatId).subscribe((messages: Message[]) => {
           this.messages = messages;
+          
         });
       }
     });
@@ -53,12 +54,9 @@ export class ChatMessagesComponent implements OnInit {
   }
 
 
-  changePic(event) {
-    this.fileservice.onFileChanged(event);
-    this.fileservice.onUpload();
-  }
-  // displayNewPic() {
-  //  this.profilePic = document.getElementById("./assets/nophoto.png");
-
+  // changePic(event) {
+  //   this.fileservice.onFileChanged(event);
+  //   this.fileservice.onUpload();
   // }
+ 
 }
