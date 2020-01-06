@@ -15,6 +15,7 @@ import { RightSideBarComponent } from './components/hub/right-side-bar/right-sid
 import { NavbarComponent } from './components/hub/navbar/navbar.component';
 import { PollComponent } from './components/hub/poll/poll.component';
 import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 
@@ -37,7 +38,15 @@ import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+             return     localStorage.getItem('access_token');},
+        whitelistedDomains: ['localhost:3000'],       //this was in the sample code. doubt we need this.
+        blacklistedRoutes: ['http://localhost:3000/auth/login']  //this was in the sample code. doubt we need this.
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

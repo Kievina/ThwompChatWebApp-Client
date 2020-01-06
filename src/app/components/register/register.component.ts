@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Register } from '../../models/register';
-import { RegisterService } from '../../services/register.service';
-import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -9,15 +8,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  form: any = {};
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  newUser: Register = new Register();
-  constructor(private registerService: RegisterService, private router: Router) { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
   }
 
-  registerForm(){
-    this.registerService.registerUser(this.newUser).subscribe(data => this.router.navigate(['/login']));
+  onSubmit() {
+    this.authService.register(this.form).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
   }
-
 }

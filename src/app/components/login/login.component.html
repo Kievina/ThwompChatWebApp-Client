@@ -1,22 +1,75 @@
-<div class="container">
-    <h1><b>User Login</b></h1>
-    <hr style="margin: 0 15%; border-top-color: #18d26e;">
-
-    <form #it="ngForm" (ngSubmit)="loginForm()">
-
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" type="username" name="username" class="form-control" [(ngModel)]="login.username" 
-                    #username="ngModel" required>
+<div class="col-md-12">
+        <div class="card card-container">
+          <img
+            id="profile-img"
+            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            class="profile-img-card"
+          />
+          <form
+            *ngIf="!isLoggedIn"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                [(ngModel)]="form.username"
+                required
+                #username="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && username.invalid"
+              >
+                Username is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                #password="ngModel"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && password.invalid"
+              >
+                <div *ngIf="password.errors.required">Password is required</div>
+                <div *ngIf="password.errors.minlength">
+                  Password must be at least 6 characters
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary btn-block">
+                Login
+              </button>
+            </div>
+            <div class="form-group">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="f.submitted && isLoginFailed"
+              >
+                Login failed: {{ errorMessage }}
+              </div>
+            </div>
+          </form>
+      
+          <div class="alert alert-success" *ngIf="isLoggedIn">
+            Logged in as {{ username }}.
+          </div>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <!-- type password being stupid -->
-            <input type="text" type="" name="password" class="form-control" [(ngModel)]="login.password" 
-                    #password="ngModel" required>
-        </div>
-        <button type="submit" class="btn" [disabled]="!it.form.valid">Log in</button>
-        <p class="register">Need an account? <a routerLink="/register" class="login-switch link">Register</a></p>
-    </form>
-
-</div>
+      </div>
