@@ -16,6 +16,8 @@ import { NavbarComponent } from './components/hub/navbar/navbar.component';
 import { PollComponent } from './components/hub/poll/poll.component';
 import { NewChatComponent } from './components/hub/user-chats/new-chat/new-chat.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -32,6 +34,8 @@ import { JwtModule } from '@auth0/angular-jwt';
     NavbarComponent,
     PollComponent,
     NewChatComponent,
+    HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

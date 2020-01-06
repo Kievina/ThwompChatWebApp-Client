@@ -39,6 +39,10 @@ export class UserService {
       return this.currentUser.asObservable();
   }
 
+  getPublicContent(): Observable<any> {
+    return this.http.get(this.url + 'all', { responseType: 'text' });
+  }
+
   // registerUser(user) {
   //   return this.http.post(`http://${window.location.hostname}:8080/user/`, user)
   //     .pipe(
