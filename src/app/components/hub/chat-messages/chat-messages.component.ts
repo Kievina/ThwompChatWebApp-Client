@@ -34,6 +34,7 @@ export class ChatMessagesComponent implements OnInit {
         this.chatName = chat.chatName;
         messageService.getAllMessages(chat.chatId).subscribe((messages: Message[]) => {
           this.messages = messages;
+          
         });
         messageService.getMessageObserver().subscribe(message => {
           this.messages.push(message);

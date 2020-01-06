@@ -1,7 +1,8 @@
 <h3>@{{chatName}}</h3>
 <ul class="list-group messages">
-  <li  *ngFor="let Message of messages"  class="list-group-item" >
+  <li  *ngFor="let Message of messages"  class="list-group-item">
     <!-- <script>getMessageSender(Message.sender.userId)</script> -->
+    <img type="file"  src="{{Message.sender.profilePic}}" alt="default" style="width:32px;height:32x;" >
     <p>{{Message.sender.userName}}</p>
     <p>{{Message.timeStamp|date:"medium"}}</p>
   
