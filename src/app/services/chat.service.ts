@@ -37,4 +37,22 @@ export class ChatService {
               return of(); })
         );
   }
+
+  createChat(chat, adminId) {
+    return this.http.post(`http://${window.location.hostname}:8080/chat/${adminId}`, chat)
+        .pipe(
+            catchError(error => {
+              console.log('Error creating chat');
+              return of(); })
+        );
+  }
+
+  addUserToChat(chatId, username) {
+    return this.http.put(`http://${window.location.hostname}:8080/chat/${chatId}/user/${username}`, null)
+        .pipe(
+            catchError(error => {
+              console.log('Error adding user chat');
+              return of(); })
+        );
+  }
 }

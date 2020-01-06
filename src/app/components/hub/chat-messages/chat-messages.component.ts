@@ -18,13 +18,9 @@ export class ChatMessagesComponent implements OnInit {
   private messages: Message[];
   messageInput;
   chatName;
-  currentUser:User = this.userService.getCurrentUser();
+  currentUser: User = this.userService.getCurrentUser();
   profilePic = this.currentUser.profilePic;
-  
-  
-  
-  
- 
+
   constructor(private messageService: MessageService,
               private chatService: ChatService,
               private userService: UserService,
@@ -44,10 +40,8 @@ export class ChatMessagesComponent implements OnInit {
     });
 
   }
-  
-  ngOnInit() {
-    
-  }
+
+  ngOnInit() { }
 
   sendMessage() {
     this.messageService.sendMessage(this.userService.getCurrentUser().userId, 1, this.messageInput).subscribe(response =>
@@ -60,8 +54,6 @@ export class ChatMessagesComponent implements OnInit {
   changePic(event){
     this.fileservice.onFileChanged(event);
     this.fileservice.onUpload();
-    
-  
   }
   // displayNewPic() {
   //  this.profilePic = document.getElementById("./assets/nophoto.png");

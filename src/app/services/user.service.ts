@@ -51,17 +51,16 @@ export class UserService {
     this.currentUser.next(null);
   }
 
-  getCurrentUserChats() {
-    return this.http.get(`http://localhost:8080/user/${this.getCurrentUser().userId}/chats`)
-      .pipe(
-        catchError(error => {
-          console.log('Oh No, mi pipe');
-          return of(); })
-      );
+  userExists(username: string) {
+      return this.http.get(`http://${window.location.hostname}:8080/user/${username}/exists`)
+          .pipe(catchError(error => {
+              console.log('Error checking if user exists');
+              return of(); })
+          );
   }
 
   updateCurrentUserProfilePic(filename) {
-    let user = this.getCurrentUser();
+    const user = this.getCurrentUser();
     user.profilePic = filename;
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
