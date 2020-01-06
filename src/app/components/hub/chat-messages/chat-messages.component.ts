@@ -57,8 +57,5 @@ export class ChatMessagesComponent implements OnInit {
     this.fileservice.onFileChanged(event);
     this.fileservice.onUpload();
   }
-  // displayNewPic() {
-  //  this.profilePic = document.getElementById("./assets/nophoto.png");
-
-  // }
+ 
 }

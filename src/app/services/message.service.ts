@@ -28,8 +28,10 @@ export class MessageService {
   connectToWebSocket() {
     this.stompClient.connect({}, () => {
       this.chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
-        this.subscribeToChat(chat.chatId);
-        console.log('ho');
+        if(chat != null) {
+          this.subscribeToChat(chat.chatId);
+          console.log('ho');
+        }
       });
     });
   }

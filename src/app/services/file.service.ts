@@ -8,7 +8,7 @@ import { UserService } from '../services/user.service'
 export class FileService {
 
   selectedFile: File
-  uploadUrl: string = 'http://localhost:8080/uploadFile';
+  uploadUrl: string = `http://${window.location.hostname}:8080/uploadFile`;
   responseFile: FileObj;
 
   
@@ -23,7 +23,7 @@ export class FileService {
   onUpload(){
     let fd = new FormData();
     fd.append('file', this.selectedFile);
-    this.http.post(this.uploadUrl, fd).subscribe( (response:Response) => {
+    this.http.post(this.uploadUrl, fd).subscribe( (response: Response) => {
       console.log(response)
       this.updatePhoto();
       console.log(this.userService.getCurrentUser());
@@ -31,12 +31,11 @@ export class FileService {
 
   }
   updatePhoto(){
-    
-    this.http.patch('http://localhost:8080/user/'+ this.userService.getCurrentUser().userId, this.userService.getCurrentUser()).subscribe(Response => {
-      console.log(Response)
-      this.userService.updateCurrentUserProfilePic('http://localhost:8080/downloadFile/' + this.selectedFile.name);
+    this.userService.updateCurrentUserProfilePic(`http://${window.location.hostname}:8080/downloadFile/` + this.selectedFile.name);
+
+    const user = this.userService.getCurrentUser();
+    this.http.patch(`http://${window.location.hostname}:8080/user/` + user.userId, user).subscribe(Response => {
+      console.log(Response);
     });
   }
-
-
 }
