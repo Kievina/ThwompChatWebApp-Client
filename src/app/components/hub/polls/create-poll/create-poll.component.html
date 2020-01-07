@@ -14,20 +14,21 @@
 </div>
 </form>   -->
 
-<form (ngSubmit)="newPollSubmit()" (keydown.enter)="$event.preventDefault()">
+<form (ngSubmit)="newPollSubmit()">
 
     <!-- <a class="btn btn-primary" role="button" (click)="displayNewPoll = !displayNewPoll"> Create New Poll</a> -->
-    
+
     <div class="form-group">
         <label class="sr-only" for="poll-question-input"></label>
-        <input [(ngModel)]="questionInput" name="pollQuestion" type="text" class="form-control" id="poll-question-input" placeholder="Type your question here ...">
+        <input [(ngModel)]="pollQuestion" name="pollQuestion" type="text" class="form-control" id="poll-question-input"
+            placeholder="Type your question here ...">
         <!-- <a class="btn btn-primary" role="button" (click)="displayNewOption = !displayNewOption">+ Add Option</a> -->
     </div>
-    
+
     <!-- <div class="form-group" *ngIf="displayNewOption">
        
         <input type="text" class="form-control" id="optionInput" placeholder="New answer choice here ...">
         <button type="submit" class="btn btn-primary">Submit Poll</button>
     </div> -->
-    
-    </form>
+
+</form>

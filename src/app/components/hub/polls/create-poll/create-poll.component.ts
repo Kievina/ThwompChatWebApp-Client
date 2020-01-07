@@ -16,9 +16,8 @@ export class CreatePollComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitNewPoll() {
-    // const poll  = {pollQuestion: this.questionInput}
-    const displayQuestion = 'Poll question is ${this.pollQuestion}';
+  newPollSubmit() {
+    const displayQuestion = `Poll question is ${this.pollQuestion}`;
     alert(displayQuestion);
     console.log('new poll question created')
   }
