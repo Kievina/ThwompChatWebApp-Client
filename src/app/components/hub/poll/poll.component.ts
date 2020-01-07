@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./poll.component.css']
 })
 export class PollComponent implements OnInit {
-  private displayNewPoll = false;
-  private displayNewOption = false;
+  displayNewPoll = false;
+  displayNewOption = false;
 
   constructor() { }
 

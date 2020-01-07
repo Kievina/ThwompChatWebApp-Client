@@ -10,9 +10,9 @@ import {Chat} from '../../../../models/chat.model';
 })
 export class NewChatComponent implements OnInit {
 
-  private newUserNamesList: string[] = [];
-  private chatNameInput;
-  private chatUsersInput;
+  newUserNamesList: string[] = [];
+  chatNameInput;
+  chatUsersInput;
 
   constructor(private chatService: ChatService, private userService: UserService) {
   }

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat-messages.component.css']
 })
 export class ChatMessagesComponent implements OnInit {
-  private messages: Message[];
+  messages: Message[];
   messageInput;
   chatName;
   // currentUser: User = this.userService.getCurrentUser();
@@ -23,15 +23,12 @@ export class ChatMessagesComponent implements OnInit {
   constructor(private messageService: MessageService,
               private chatService: ChatService,
               private userService: UserService,
-              private router: Router,
-            
-              ) {
+              private router: Router,) {
     chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
       if (chat != null) {
         this.chatName = chat.chatName;
         messageService.getAllMessages(chat.chatId).subscribe((messages: Message[]) => {
           this.messages = messages;
-          
         });
       }
     });
