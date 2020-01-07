@@ -7,19 +7,26 @@ import { PollService } from 'src/app/services/poll.service';
   styleUrls: ['./create-poll.component.css']
 })
 export class CreatePollComponent implements OnInit {
-  question: string;
-  option: string;
+  optionInput: string;
   pollQuestion: string;
+  displayNewPoll = false;
+  displayNewOption = false;
 
   constructor(pollService: PollService) { }
 
   ngOnInit() {
   }
 
-  newPollSubmit() {
+  newPollQuestionSubmit() {
     const displayQuestion = `Poll question is ${this.pollQuestion}`;
     alert(displayQuestion);
-    console.log('new poll question created')
+    console.log('new poll question created');
+  }
+
+  newOptionSubmit() {
+    const displayNewOption =`Option input is ${this.optionInput}`;
+    alert(this.displayNewOption);
+    console.log('new poll option created');
   }
 
 }
