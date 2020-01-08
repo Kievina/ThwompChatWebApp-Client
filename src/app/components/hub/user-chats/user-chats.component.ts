@@ -9,7 +9,6 @@ import { Chat } from '../../../models/chat.model';
 })
 export class UserChatsComponent implements OnInit {
   chats: Chat[];
-  displayNewChat = false;
 
   constructor(private chatService: ChatService) {
     chatService.getUserChatsObservable().subscribe( (response: Chat[]) => {

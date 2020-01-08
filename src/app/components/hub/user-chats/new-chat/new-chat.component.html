@@ -1,4 +1,5 @@
-<form (ngSubmit)="newChatSubmit()" (keydown.enter)="$event.preventDefault()">
+<a class="btn btn-primary" role="button" (click)="displayNewChat = !displayNewChat">+</a>
+<form *ngIf="displayNewChat" (ngSubmit)="newChatSubmit()" (keydown.enter)="$event.preventDefault()">
     <div class="form-group">
         <label class="sr-only" for="chat-name-input"></label>
         <input [(ngModel)]="chatNameInput" name="chatName" type="text" class="form-control" id="chat-name-input" placeholder="Chat Name">

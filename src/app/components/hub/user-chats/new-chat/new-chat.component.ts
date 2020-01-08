@@ -10,6 +10,7 @@ import {Chat} from '../../../../models/chat.model';
 })
 export class NewChatComponent implements OnInit {
 
+  displayNewChat = false;
   newUserNamesList: string[] = [];
   chatNameInput;
   chatUsersInput;
@@ -43,6 +44,7 @@ export class NewChatComponent implements OnInit {
         }
       });
       console.log('make new chat');
+      this.displayNewChat = false;
     }
   }
 }
