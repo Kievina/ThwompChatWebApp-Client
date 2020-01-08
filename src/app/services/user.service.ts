@@ -10,7 +10,7 @@ import {User} from '../models/user.model';
 })
 export class UserService {
   private currentUser: BehaviorSubject<User>;
-
+  private
   constructor(private http: HttpClient) {
     this.currentUser = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     console.log(this.currentUser.value);
@@ -67,5 +67,17 @@ export class UserService {
     const user = this.getCurrentUser();
     user.profilePic = filename;
     localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+  getUserById(id)  {
+    let returnedUser;
+    this.http.get(`http://localhost:8080/user/${id}`).pipe(
+      map((result: User) => {
+        
+        returnedUser = result; }),
+      catchError(error => {
+        console.log('Oh No, mi pipe');
+        return of(); })
+    );
+   return returnedUser;
   }
 }

@@ -8,8 +8,7 @@ import { Chat } from '../../../models/chat.model';
   styleUrls: ['./user-chats.component.css']
 })
 export class UserChatsComponent implements OnInit {
-  private chats: Chat[];
-  private displayNewChat = false;
+  chats: Chat[];
 
   constructor(private chatService: ChatService) {
     chatService.getUserChatsObservable().subscribe( (response: Chat[]) => {

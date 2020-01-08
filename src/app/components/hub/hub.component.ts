@@ -10,7 +10,7 @@ import { User } from '../../models/user.model';
 })
 export class HubComponent implements OnInit {
 
-  private currentUser: User;
+  currentUser: User;
 
   constructor(private userService: UserService, private router: Router) {
     this.currentUser = userService.getCurrentUser();
@@ -21,7 +21,4 @@ export class HubComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  
-
 }
