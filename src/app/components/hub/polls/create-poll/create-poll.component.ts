@@ -6,27 +6,54 @@ import { PollService } from 'src/app/services/poll.service';
   templateUrl: './create-poll.component.html',
   styleUrls: ['./create-poll.component.css']
 })
+
 export class CreatePollComponent implements OnInit {
-  optionInput: string;
-  pollQuestion: string;
   displayNewPoll = false;
   displayNewOption = false;
+  pollQuestionInput: string;
+  optionInput: any;
 
-  constructor(pollService: PollService) { }
+  constructor(private pollService: PollService) { }
 
   ngOnInit() {
   }
 
-  newPollQuestionSubmit() {
-    const displayQuestion = `Poll question is ${this.pollQuestion}`;
-    alert(displayQuestion);
-    console.log('new poll question created');
+  addPollQuestionToPoll() {
+    this.pollService.addQuestion(`${this.pollQuestionInput}`);
   }
 
-  newOptionSubmit() {
-    const displayNewOption =`Option input is ${this.optionInput}`;
-    alert(this.displayNewOption);
-    console.log('new poll option created');
+  addOptionToPoll() {
+    this.pollService.addOption(`${this.optionInput}`);
+  }
+
+  submitNewPoll () {
+    console.log('logic need to be written');
+    // if (this.pollQuestionInput !== null) {
+      //     const options = this.optionsList;
+      //     const poll = { p: this.pollQuestionInput };
+      //     this.chatService.createChat(chat, this.userService.getCurrentUser().userId).subscribe((response: Chat) => {
+      //       this.chatService.addUserToChat(response.chatId, this.userService.getCurrentUser().userName).subscribe();
+      //       for (const name of userNames) {
+      //         this.chatService.addUserToChat(response.chatId, name).subscribe();
+      //       }
+      //     });
+      //     console.log('make new chat');
+      //   }
+      // }
+  }
+
+  addOption() {
+   console.log('logic need to be written')
+      //   this.pollService.userExists(this.optionInput).subscribe(exists => {
+      //     if (exists && this.chatUsersInput !== this.userService.getCurrentUser().userName
+      //         && this.newUserNamesList.indexOf(this.chatUsersInput) < 0) {
+      //       this.newUserNamesList.push(this.chatUsersInput);
+      //       this.chatUsersInput = '';
+      //     } else {
+      //       this.chatUsersInput = 'nope';
+      //     }
+      //   });
+      // }
   }
 
 }
