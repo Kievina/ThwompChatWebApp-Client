@@ -29,7 +29,7 @@ export class MessageService {
   connectToWebSocket() {
     this.stompClient.connect({}, () => {
       this.chatService.getCurrentChatObservable().subscribe((chat: Chat) => {
-        if(chat != null) {
+        if (chat != null) {
           this.subscribeToChat(chat.chatId);
           console.log('ho');
         }
@@ -68,5 +68,4 @@ export class MessageService {
       })
     );
   }
- 
 }
