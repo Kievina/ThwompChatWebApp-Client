@@ -11,10 +11,10 @@
                 <span class="navbar-text">{{currentUser.userName}}</span>
             </a>
             <div class="dropdown-menu nav-tabs">
-                <a class="dropdown-item" (click)="userNavClick('home')">home</a>
                 <a class="dropdown-item" (click)="userNavClick('profile')">Profile</a>
                 <a class="dropdown-item" (click)="userNavClick('friends')">Friends</a>
                 <a class="dropdown-item" (click)="userNavClick('create-poll')">Create Poll</a>
+                <a class="dropdown-item" (click)="userNavClick('view-polls')">View Polls</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" role="button" (click)="logoutCLick()">Logout</a>
             </div>
