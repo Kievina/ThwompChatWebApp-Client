@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Poll } from '../models/poll.model';
 import { Option } from '../models/option.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +11,18 @@ import { Option } from '../models/option.model';
 export class PollService {
   public poll: Poll;
   public option: Option;
-  constructor() { }
+  public optionsList: Array<Option>;
 
-  addQuestion(pollQuestionInput: string) {
-    let poll = { pollQuestion: pollQuestionInput };
-    console.log(poll);
-  }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService) { }
 
-  addOption(optionInput: string) {
-    let option = { optionName: optionInput }
-    let poll = { options: [option] };
-    console.log(poll);
+  createPoll(poll, chatId: number) {
+    let header = new HttpHeaders();
+header= header.append('content-type', 'application/json');
+    // poll.options
+    return this.http.post(`http://${window.location.hostname}:8080/chat/${chatId}/polls`, poll, {headers: header})
+    .subscribe(response => console.log(response));
   }
 }
+

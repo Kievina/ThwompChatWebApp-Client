@@ -1,18 +1,18 @@
-<form (ngSubmit)="addPollQuestionToPoll()">
-    <a class="btn btn-primary" role="button" (click)="displayNewPoll = !displayNewPoll"> Create New Poll</a>
+<form (ngSubmit)="addPollQuestion()">
     <div class="form-group">
         <label class="sr-only" for="poll-question-input"></label>
         <input [(ngModel)]="pollQuestionInput" name="question" type="text" class="form-control" id="poll-question-input"
-            placeholder="Type your question here ...">
+            placeholder="Enter question here ...">
     </div>
 </form>
-<form (ngSubmit)="addOptionToPoll()">
-    <a class="btn btn-primary" role="button" (click)="displayNewOption = !displayNewOption">+ Add Option</a>
-    <div class="form-group" *ngIf="displayNewOption">
+<form (ngSubmit)="addOptionNameToList()" class="form-inline">
+    <div class="form-group">
         <label class="sr-only" for="option-input"></label>
-        <input [(ngModel)]="optionInput" name="option" type="text" class="form-control" id="option-input"
-            placeholder="New answer choice here ...">
+        <input [(ngModel)]="optionInput" name="option" type="text" class="form-control" id="option-input" 
+            placeholder="Enter choice here ...">
     </div>
+    <!-- Add this if adding each option via a button click -->
+    <!-- <button type="submit" class="btn btn-primary" (click)="addOptionToPoll()">+ Add Option </button> -->
 </form>
-<p> </p>
+<p> Hit Enter to add additional options </p>
 <button type="submit" class="btn btn-primary" (click)="submitNewPoll()">Submit Poll</button>

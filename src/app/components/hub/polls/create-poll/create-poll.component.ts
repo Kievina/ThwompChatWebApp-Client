@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PollService } from 'src/app/services/poll.service';
+import { Option } from 'src/app/models/option.model';
+import { ChatService } from 'src/app/services/chat.service';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-create-poll',
@@ -8,52 +11,55 @@ import { PollService } from 'src/app/services/poll.service';
 })
 
 export class CreatePollComponent implements OnInit {
-  displayNewPoll = false;
-  displayNewOption = false;
   pollQuestionInput: string;
-  optionInput: any;
+  optionInput: string;
+  optionNamesList: string[] = [];
 
-  constructor(private pollService: PollService) { }
+  constructor(
+    private pollService: PollService,
+    private chatService: ChatService) { }
 
   ngOnInit() {
   }
-
-  addPollQuestionToPoll() {
-    this.pollService.addQuestion(`${this.pollQuestionInput}`);
+  addPollQuestion() {
+    this.pollQuestionInput = `${this.pollQuestionInput}`;
+    console.log('poll question saved to variable');
+    console.log(this.pollQuestionInput);
+  }
+  addOptionNameToList() {
+    this.optionNamesList.push(`${this.optionInput}`)
+    console.log('optionInput saved to a list');
+    console.log(this.optionNamesList);
+  }
+  // createOptionsList() {
+  //   this.optionNamesList.forEach(function (name: string) {
+  //     const option = { optionName: name };
+  //     this.optionsList.push(option);
+  //   });
+  // }
+  convertToPoll() {
+    let optionsList = [];
+    // let optionsList: string = "{" + "pollQuestion" + ":" + this.pollQuestionInput + "," + "options" + ":[";
+    const listLength = this.optionNamesList.length;
+    // for (let i = 0; i < listLength -1; i++) {
+    //   optionsList += "{" +"optionName" +":"+ this.optionNamesList[i] + "},"
+    // };
+    // optionsList += "{" + "optionName" + ":" + this.optionNamesList[listLength-1] + "}]}"
+    // return optionsList;
+    for (let i = 0; i < listLength; i++) {
+      const optionObj = {optionName: this.optionNamesList[i]}
+      optionsList.push(optionObj);
+    };
+    const poll = { pollQuestion: this.pollQuestionInput, options: optionsList };
+    return poll;
   }
 
-  addOptionToPoll() {
-    this.pollService.addOption(`${this.optionInput}`);
-  }
-
-  submitNewPoll () {
-    console.log('logic need to be written');
-    // if (this.pollQuestionInput !== null) {
-      //     const options = this.optionsList;
-      //     const poll = { p: this.pollQuestionInput };
-      //     this.chatService.createChat(chat, this.userService.getCurrentUser().userId).subscribe((response: Chat) => {
-      //       this.chatService.addUserToChat(response.chatId, this.userService.getCurrentUser().userName).subscribe();
-      //       for (const name of userNames) {
-      //         this.chatService.addUserToChat(response.chatId, name).subscribe();
-      //       }
-      //     });
-      //     console.log('make new chat');
-      //   }
-      // }
-  }
-
-  addOption() {
-   console.log('logic need to be written')
-      //   this.pollService.userExists(this.optionInput).subscribe(exists => {
-      //     if (exists && this.chatUsersInput !== this.userService.getCurrentUser().userName
-      //         && this.newUserNamesList.indexOf(this.chatUsersInput) < 0) {
-      //       this.newUserNamesList.push(this.chatUsersInput);
-      //       this.chatUsersInput = '';
-      //     } else {
-      //       this.chatUsersInput = 'nope';
-      //     }
-      //   });
-      // }
+  submitNewPoll() {
+    this.addPollQuestion();
+    this.addOptionNameToList();
+    const pollJSON =  JSON.stringify(this.convertToPoll());
+    this.pollService.createPoll(pollJSON, this.chatService.getCurrentChat().chatId);
+    console.log(pollJSON);
   }
 
 }

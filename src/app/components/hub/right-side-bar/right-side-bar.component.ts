@@ -8,6 +8,7 @@ import { FileService } from 'src/app/services/file.service';
   styleUrls: ['./right-side-bar.component.css']
 })
 export class RightSideBarComponent implements OnInit {
+  displayNewPoll = false;
   currentUser:User = this.userService.getCurrentUser();
   constructor(private userService: UserService, private fileservice: FileService) {  }
 

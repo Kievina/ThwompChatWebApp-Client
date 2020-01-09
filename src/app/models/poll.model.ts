@@ -7,12 +7,12 @@ export class Poll {
     public pollId: number;
     public pollQuestion: string;
     public timeStamp: string;
-    public options: Array<Option>;
-    public votes: Array<Vote>;
+    public options: Option[];
+    public votes: Vote[];
     public chat: Chat;
     public pollCreator: User;
 
-    constructor(pollId: number, pollQuestion: string, timeStamp: string, options: Array<Option>, votes: Array<Vote>, chat: Chat, pollCreator: User) {
+    constructor(pollId: number, pollQuestion: string, timeStamp: string, options: Option[], votes: Array<Vote>, chat: Chat, pollCreator: User) {
         this.pollId = pollId;
         this.pollQuestion = pollQuestion;
         this.timeStamp = timeStamp;
@@ -20,4 +20,5 @@ export class Poll {
         this.chat = chat;
         this.pollCreator = pollCreator;
     }
+
 }
