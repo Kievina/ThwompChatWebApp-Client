@@ -1,10 +1,5 @@
-<!-- Previous working side bar menu -->
 <div class="container">
     <div class="tab-content">
-        <div id="home" *ngIf="selection=='home'">
-            <h3>Home</h3>
-            <p>Home Details.</p>
-        </div>
         <div id="profile" *ngIf="selection=='profile'">
             <h3>Profile</h3>
             <p>Profile Details.</p>
@@ -22,6 +17,10 @@
         <div id="createpoll" *ngIf="selection=='create-poll'">
             <h3>Create Poll</h3>
             <app-poll></app-poll>
+        </div>
+        <div id="viewpolls" *ngIf="selection=='view-polls'">
+            <h3>View Polls</h3>
+            <!-- <app-view-polls></app-view-polls> -->
         </div>
     </div>
 </div>
