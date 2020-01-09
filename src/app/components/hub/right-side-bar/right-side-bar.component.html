@@ -17,6 +17,12 @@
         <div id="profile" class="tab-pane fade">
             <h3>Profile</h3>
             <p>Profile Details.</p>
+            <img type="file"  src="{{currentUser.profilePic}}" alt="default" style="width:32px;height:32x;" >
+            <input
+            style="display: none"
+            type="file" (change)="changePic($event)"
+            #fileInput>
+            <button  (click)="fileInput.click()" (change)="changePic($event)">Upload!</button>
         </div>
         <div id="friends" class="tab-pane fade">
             <h3>Friends</h3>
