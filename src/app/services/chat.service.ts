@@ -5,13 +5,6 @@ import {BehaviorSubject, of} from 'rxjs';
 import {Chat} from '../models/chat.model';
 import {UserService} from './user.service';
 import {User} from '../models/user.model';
-import { HttpHeaders } from '@angular/common/http';
-
-const httpOptions = {
-    headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*'
-    })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +47,7 @@ export class ChatService {
 
   private loadChatsOfCurrentUser() {
     const currentUser: User = this.userService.getCurrentUser();
-    return this.http.get(`http://${window.location.hostname}:8080/chat/user/${currentUser.userId}`, httpOptions)
+    return this.http.get(`http://${window.location.hostname}:8080/chat/user/${currentUser.userId}`)
         .pipe(
             catchError(error => {
               console.log('Oh No, mi pipe');
@@ -63,7 +56,7 @@ export class ChatService {
   }
 
   createChat(chat, adminId) {
-    return this.http.post(`http://${window.location.hostname}:8080/chat/${adminId}`, chat, httpOptions)
+    return this.http.post(`http://${window.location.hostname}:8080/chat/${adminId}`, chat)
         .pipe(
             map((result: Chat) => {
                 this.userChats.value.push(result);
@@ -76,7 +69,7 @@ export class ChatService {
   }
 
   addUserToChat(chatId, username) {
-    return this.http.put(`http://${window.location.hostname}:8080/chat/${chatId}/user/${username}`, null, httpOptions)
+    return this.http.put(`http://${window.location.hostname}:8080/chat/${chatId}/user/${username}`, null)
         .pipe(
             catchError(error => {
               console.log('Error adding user chat');

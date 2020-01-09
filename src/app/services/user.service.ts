@@ -10,7 +10,7 @@ import {User} from '../models/user.model';
 })
 export class UserService {
   private currentUser: BehaviorSubject<User>;
-  private
+
   constructor(private http: HttpClient) {
     this.currentUser = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     console.log(this.currentUser.value);

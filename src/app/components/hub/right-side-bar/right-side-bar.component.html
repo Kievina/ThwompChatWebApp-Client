@@ -10,21 +10,25 @@
 
     <div class="tab-content">
         <div id="profile" class="tab-pane fade">
+    <div class="tab-content">
+        <div id="home" *ngIf="selection=='home'">
+            <h3>Home</h3>
+            <p>Home Details.</p>
+        </div>
+        <div id="profile" *ngIf="selection=='profile'">
             <h3>Profile</h3>
             <p>Profile Details.</p>
             <img type="file" src="{{currentUser.profilePic}}" alt="default" style="width:32px;height:32x;">
             <input style="display: none" type="file" (change)="changePic($event)" #fileInput>
             <button (click)="fileInput.click()" (change)="changePic($event)">Upload!</button>
         </div>
-        <div id="friends" class="tab-pane fade">
+        <div id="friends" *ngIf="selection=='friends'">
             <h3>Friends</h3>
             <p>Friends Details.</p>
         </div>
-        <div id="createpoll" class="tab-pane fade">
-            <h3> Create Poll </h3>
-            <app-create-poll></app-create-poll>
-            <h3> View Polls </h3>
-            <app-view-polls></app-view-polls>
+        <div id="createpoll" *ngIf="selection=='create-poll'">
+            <h3>Create Poll</h3>
+            <app-poll></app-poll>
         </div>
     </div>
 </div>
