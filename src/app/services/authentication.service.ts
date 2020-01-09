@@ -19,7 +19,9 @@ export class AuthenticationService {
     return this.http.post(AUTH_API + 'login', {
       username: credentials.username,
       password: credentials.password
-    }, httpOptions);
+    }, httpOptions).pipe(
+      
+    );
   }
 
   register(user): Observable<any> {

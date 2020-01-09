@@ -14,24 +14,25 @@ export class UserService {
   private url: string = "http://localhost:8080/";
 
   constructor(private http: HttpClient) { }
-  getUser(username: string): Observable<any> {
-    return this.http.get<any>(this.url + "user/get/" + username);
-  }
-  getUserId(username: string): Observable<any> {
-    return this.http.get<any>(this.url + "user/get/" + username).pipe(map(
-      userData => {
-        sessionStorage.setItem('userId', userData.userId);
-      }
-    ));
-  }
+  
+  // getUser(username: string): Observable<any> {
+  //   return this.http.get<any>(this.url + "user/get/" + username);
+  // }
+  // getUserId(username: string): Observable<any> {
+  //   return this.http.get<any>(this.url + "user/get/" + username).pipe(map(
+  //     userData => {
+  //       sessionStorage.setItem('userId', userData.userId);
+  //     }
+  //   ));
+  // }
+
   getCurrentUser() {
     return this.currentUser.value;
   }
 
-
-  updateUser(user: User) {
-    return this.http.put<User[]>(this.url + "user/update/" + sessionStorage.getItem('userId'), user);
-  }
+  // updateUser(user: User) {
+  //   return this.http.put<User[]>(this.url + "user/update/" + sessionStorage.getItem('userId'), user);
+  // }
 
   // Commented out merge conflict rather than delete.
   // =======
