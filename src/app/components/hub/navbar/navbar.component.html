@@ -5,18 +5,18 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <ul class="navbar-nav">
-        <li ngbDropdown class="nav-item">
-            <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown1" role="button">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{currentUser.profilePic}}" alt="default" style="width:32px;height:32px;">
                 <span class="navbar-text">{{currentUser.userName}}</span>
             </a>
-            <div ngbDropdownMenu class="dropdown-menu nav-tabs">
-                <a ngbDropdownItem (click)="userNavClick('home')">home</a>
-                <a ngbDropdownItem (click)="userNavClick('profile')">Profile</a>
-                <a ngbDropdownItem (click)="userNavClick('friends')">Friends</a>
-                <a ngbDropdownItem (click)="userNavClick('create-poll')">Create Poll</a>
+            <div class="dropdown-menu nav-tabs">
+                <a class="dropdown-item" (click)="userNavClick('home')">home</a>
+                <a class="dropdown-item" (click)="userNavClick('profile')">Profile</a>
+                <a class="dropdown-item" (click)="userNavClick('friends')">Friends</a>
+                <a class="dropdown-item" (click)="userNavClick('create-poll')">Create Poll</a>
                 <div class="dropdown-divider"></div>
-                <a ngbDropdownItem role="button" (click)="logoutCLick()">Logout</a>
+                <a class="dropdown-item" role="button" (click)="logoutCLick()">Logout</a>
             </div>
         </li>
     </ul>
