@@ -31,21 +31,10 @@ export class CreatePollComponent implements OnInit {
     console.log('optionInput saved to a list');
     console.log(this.optionNamesList);
   }
-  // createOptionsList() {
-  //   this.optionNamesList.forEach(function (name: string) {
-  //     const option = { optionName: name };
-  //     this.optionsList.push(option);
-  //   });
-  // }
+
   convertToPoll() {
     let optionsList = [];
-    // let optionsList: string = "{" + "pollQuestion" + ":" + this.pollQuestionInput + "," + "options" + ":[";
     const listLength = this.optionNamesList.length;
-    // for (let i = 0; i < listLength -1; i++) {
-    //   optionsList += "{" +"optionName" +":"+ this.optionNamesList[i] + "},"
-    // };
-    // optionsList += "{" + "optionName" + ":" + this.optionNamesList[listLength-1] + "}]}"
-    // return optionsList;
     for (let i = 0; i < listLength; i++) {
       const optionObj = {optionName: this.optionNamesList[i]}
       optionsList.push(optionObj);
@@ -61,5 +50,4 @@ export class CreatePollComponent implements OnInit {
     this.pollService.createPoll(pollJSON, this.chatService.getCurrentChat().chatId);
     console.log(pollJSON);
   }
-
 }
