@@ -1,9 +1,23 @@
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand">THWOMP CHAT</a>
-    <form class="form-inline">
+    <form class="form-inline d-none d-md-block">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <img type="file"  src="{{currentUser.profilePic}}" alt="default" style="width:32px;height:32x;" >
-    <a class="btn btn-primary" role="button" (click)="logoutCLick()">Logout</a>
+    <ul class="navbar-nav">
+        <li ngbDropdown class="nav-item">
+            <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown1" role="button">
+                <img src="{{currentUser.profilePic}}" alt="default" style="width:32px;height:32px;">
+                <span class="navbar-text">{{currentUser.userName}}</span>
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu nav-tabs">
+                <a ngbDropdownItem (click)="userNavClick('home')">home</a>
+                <a ngbDropdownItem (click)="userNavClick('profile')">Profile</a>
+                <a ngbDropdownItem (click)="userNavClick('friends')">Friends</a>
+                <a ngbDropdownItem (click)="userNavClick('create-poll')">Create Poll</a>
+                <div class="dropdown-divider"></div>
+                <a ngbDropdownItem role="button" (click)="logoutCLick()">Logout</a>
+            </div>
+        </li>
+    </ul>
 </nav>
