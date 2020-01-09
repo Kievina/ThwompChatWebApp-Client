@@ -18,8 +18,8 @@ ngOnInit() {
   this.isLoggedIn = !!this.tokenStorageService.getToken();
 
   if (this.isLoggedIn) {
-    const user = this.tokenStorageService.getUser();
-    this.username = user.username;
+    //const user = this.tokenStorageService.getUser();
+    //this.username = user.username;
   }
 }
 

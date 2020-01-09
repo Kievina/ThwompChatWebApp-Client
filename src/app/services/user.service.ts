@@ -25,13 +25,25 @@ export class UserService {
     return this.currentUser.value;
   }
 
-
   getCurrentUserObservable() {
       return this.currentUser.asObservable();
   }
 
   getPublicContent(): Observable<any> {
     return this.http.get(this.url + 'all', { responseType: 'text' });
+  }
+
+  retrieveUserDTO(username: string, token: string) {
+    return this.http.get(`http://${window.location.hostname}:8080/user/${username}/test`)
+      .pipe(
+        map((result: User) => {
+          localStorage.setItem('currentUser', JSON.stringify(result));
+          this.currentUser.next(result);
+          return result; }),
+        catchError(error => {
+          console.log('Oh No, mi pipe');
+          return of(); })
+      );
   }
 
   getCurrentUserChats() {
@@ -59,6 +71,7 @@ export class UserService {
     user.profilePic = filename;
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
+
   getUserById(id)  {
     let returnedUser;
     this.http.get(`http://localhost:8080/user/${id}`).pipe(

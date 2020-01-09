@@ -15,11 +15,8 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials): Observable<any> {
-    return this.http.post(AUTH_API + 'login', {
-      username: credentials.username,
-      password: credentials.password
-    }, httpOptions).pipe(
+  authenticate(credentials): Observable<any> {
+    return this.http.post(AUTH_API + 'login', credentials, httpOptions).pipe(
       
     );
   }
